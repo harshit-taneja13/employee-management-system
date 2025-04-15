@@ -16,14 +16,13 @@ import (
 var Client *mongo.Client
 
 // ConnectDB establishes connection to MongoDB
-// CRCIKKjLtRSEW4yR
 func ConnectDB() error{
 	// load .env
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("env load erroc", err)
+		log.Fatal("Env load error", err)
 	}
-	log.Println("env file loaded")
+	log.Println("Env file loaded")
 
 
 	clientOptions := options.Client().ApplyURI(os.Getenv("MONGO_URI"))
