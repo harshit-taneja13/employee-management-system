@@ -5,6 +5,7 @@ import (
 	"employee-management/models"
 	"errors"
 	"fmt"
+	"strings"
 
 	"go.mongodb.org/mongo-driver/v2/bson"
 	"go.mongodb.org/mongo-driver/v2/mongo"
@@ -14,8 +15,8 @@ import (
 
 // This function finds all the employees in the model acc to page and limit
 // Parameters:
-// 		context,	
-// 		page, 
+// 		context,
+// 		page,
 // 		limit
 // Returns:
 // 		[]models.Employee: Slice containing all employees
@@ -88,13 +89,22 @@ func (r *MongoEmployeeRepository) Update(ctx context.Context, id string, employe
 	if err != nil {
 		return 0, fmt.Errorf("invalid ID format : %w", err)
 	}
-	update := bson.M{"$set" : bson.M{
-		"name" : employee.Name,
-		"department" : employee.Department,
-		"age" : employee.Age,
-		"email" : employee.Email,
-	}}
-	result, err := r.getCollection().UpdateOne(ctx, bson.M{"_id" : objectID} , update)
+	update := bson.M{}
+
+	if strings.TrimSpace(employee.Name) != "" {
+		update["name"] = employee.Name
+	}
+	if strings.TrimSpace(employee.Email) != "" {
+		update["email"] = employee.Email
+	}
+	if strings.TrimSpace(employee.Department) != "" {
+		update["department"] = employee.Department
+	}
+	if employee.Age > 0 {
+		update["age"] = employee.Age
+	} 
+
+	result, err := r.getCollection().UpdateOne(ctx, bson.M{"_id" : objectID} , bson.M{"$set" : update})
 	if err != nil {
 		return 0, fmt.Errorf("error updating employee: %w", err)
 	}
@@ -133,6 +143,7 @@ func (r* MongoEmployeeRepository) CheckEmailExists(ctx context.Context, email st
 		}
 		filter = bson.M{
 			"email": email,
+			// here we are checking id != excluded id
 			"_id": bson.M{"$ne" :objectID},
 		}
 	}
