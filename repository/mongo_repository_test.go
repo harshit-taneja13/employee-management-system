@@ -24,7 +24,7 @@ type TestSetup struct{
 	Collection string
 }
 
-func SetupIntegrationTest(t *testing.T) *TestSetup {
+func SetupTest(t *testing.T) *TestSetup {
 	// Skip integration tests when running in short mode
     if testing.Short() {
         t.Skip("Skipping integration test in short mode")
@@ -96,9 +96,9 @@ func (ts *TestSetup) TeardownIntegrationTest(t *testing.T) {
 }
 
 // Test Create method
-func TestIntegrationCreate(t *testing.T) {
+func TestCreate(t *testing.T) {
     // Setup test environment
-    ts := SetupIntegrationTest(t)
+    ts := SetupTest(t)
     defer ts.TeardownIntegrationTest(t)
     
     ctx := context.Background()
@@ -136,9 +136,9 @@ func TestIntegrationCreate(t *testing.T) {
 }
 
 // Test FindAll integration
-func TestIntegrationFindAll(t *testing.T) {
+func TestFindAll(t *testing.T) {
     // Setup test environment
-    ts := SetupIntegrationTest(t)
+    ts := SetupTest(t)
     defer ts.TeardownIntegrationTest(t)
     
     ctx := context.Background()
@@ -203,9 +203,9 @@ func TestIntegrationFindAll(t *testing.T) {
 }
 
 // Test FindByID integration
-func TestIntegrationFindByID(t *testing.T) {
+func TestFindByID(t *testing.T) {
     // Setup test environment
-    ts := SetupIntegrationTest(t)
+    ts := SetupTest(t)
     defer ts.TeardownIntegrationTest(t)
     
     ctx := context.Background()
@@ -254,9 +254,9 @@ func TestIntegrationFindByID(t *testing.T) {
 }
 
 // Test Update method
-func TestIntegrationUpdate(t *testing.T) {
+func TestUpdate(t *testing.T) {
     // Setup test environment
-    ts := SetupIntegrationTest(t)
+    ts := SetupTest(t)
     defer ts.TeardownIntegrationTest(t)
     
     ctx := context.Background()
@@ -364,9 +364,9 @@ func TestIntegrationUpdate(t *testing.T) {
 }
 
 // Test Delete method
-func TestIntegrationDelete(t *testing.T) {
+func TestDelete(t *testing.T) {
     // Setup test environment
-    ts := SetupIntegrationTest(t)
+    ts := SetupTest(t)
     defer ts.TeardownIntegrationTest(t)
     
     ctx := context.Background()
@@ -418,9 +418,9 @@ func TestIntegrationDelete(t *testing.T) {
 }
 
 // Test DeleteAll method
-func TestIntegrationDeleteAll(t *testing.T) {
+func TestDeleteAll(t *testing.T) {
     // Setup test environment
-    ts := SetupIntegrationTest(t)
+    ts := SetupTest(t)
     defer ts.TeardownIntegrationTest(t)
     
     ctx := context.Background()
@@ -479,9 +479,9 @@ func TestIntegrationDeleteAll(t *testing.T) {
 }
 
 // Test CheckEmailExists method
-func TestIntegrationCheckEmailExists(t *testing.T) {
+func TestCheckEmailExists(t *testing.T) {
     // Setup test environment
-    ts := SetupIntegrationTest(t)
+    ts := SetupTest(t)
     defer ts.TeardownIntegrationTest(t)
     
     ctx := context.Background()
@@ -533,9 +533,9 @@ func TestIntegrationCheckEmailExists(t *testing.T) {
 }
 
 // Test Ping method
-func TestIntegrationPing(t *testing.T) {
+func TestPing(t *testing.T) {
     // Setup test environment
-    ts := SetupIntegrationTest(t)
+    ts := SetupTest(t)
     defer ts.TeardownIntegrationTest(t)
     
     ctx := context.Background()

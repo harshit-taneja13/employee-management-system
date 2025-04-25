@@ -117,7 +117,7 @@ func (r *MongoEmployeeRepository) Delete(ctx context.Context, id string)(int64, 
 	}
 	result, err := r.getCollection().DeleteOne(ctx, bson.M{"_id": objectID})
 	if err != nil {
-		return 0, fmt.Errorf("error deleting all employees : %w", err)
+		return 0, fmt.Errorf("error deleting employee : %w", err)
 	}
 	return result.DeletedCount, nil
 }
