@@ -14,6 +14,19 @@ type EmployeeService struct {
 	repo repository.EmployeeRepository
 }
 
+type EmployeeServiceInterface interface {
+    CreateEmployee(ctx context.Context, emp models.Employee) (interface{}, error)
+    GetAllEmployees(ctx context.Context, page, limit int) ([]models.Employee, int64, error)
+    GetEmployeeByID(ctx context.Context, id string) (models.Employee, error)
+    UpdateEmployee(ctx context.Context, id string, emp models.Employee) (int64, error)
+    DeleteEmployee(ctx context.Context, id string) (int64, error)
+    DeleteAllEmployees(ctx context.Context) (int64, error)
+    HealthCheck(ctx context.Context) error
+}
+
+// Ensure EmployeeService implements EmployeeServiceInterface
+var _ EmployeeServiceInterface = (*EmployeeService)(nil)
+
 // NewEmployeeService creates a new service instance.
 func NewEmployeeService(repo repository.EmployeeRepository) *EmployeeService {
 	return &EmployeeService{repo: repo}

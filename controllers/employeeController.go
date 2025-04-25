@@ -30,10 +30,10 @@ type Response struct {
 }
 
 type EmployeeController struct {
-	service *services.EmployeeService
+	service services.EmployeeServiceInterface
 }
 
-func NewEmployeeController(service *services.EmployeeService) *EmployeeController {
+func NewEmployeeController(service services.EmployeeServiceInterface) *EmployeeController {
 	return &EmployeeController{service: service}
 }
 
