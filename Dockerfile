@@ -30,7 +30,6 @@ RUN apk add --no-cache ca-certificates
 
 # Copy the built Go binary and env file from builder stage
 COPY --from=builder /app/employee-management .
-COPY --from=builder /app/.env .
 
 # Expose the application port
 EXPOSE 8080
