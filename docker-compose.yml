@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    image : harshittaneja/ems-crud-image:v1
+    container_name: crud-api-1
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - COLLECTION_NAME=${COLLECTION_NAME}
+      - PORT=${PORT:-8080}
+    restart: unless-stopped
+    volumes:
+      - ${PWD}/.env:/app/.env:ro
+    
