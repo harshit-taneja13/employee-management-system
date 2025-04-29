@@ -18,24 +18,23 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.24'
+          go-version: '1.24' 
+            
 
+      - name: Print directory structure
+        run: ls -alR
+    
       - name: Install dependencies
-        run: |
-            cd backend
-            go mod tidy
+        run: go mod tidy
 
       - name: Create test env file
         run: |
-          cd backend
           echo "MONGO_URI=${{ secrets.TEST_MONGO_URI }}" > .env.test
           echo "DATABASE_NAME=test_employeedb" >> .env.test
           echo "COLLECTION_NAME=test_employees" >> .env.test
 
       - name: Run unit tests
-        run: |
-          cd backend
-          go test -v -short ./...
+        run: go test -v -short ./...
 
   build_and_push:
     name: Build and Push Docker Image
@@ -59,6 +58,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./backend
+          context: ./
           push: true
           tags: harshittaneja/ems-crud-image:latest
