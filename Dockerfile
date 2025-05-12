@@ -7,7 +7,7 @@ WORKDIR /app
 RUN apk add --no-cache git
 
 # Set build environment variables
-ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
+ENV CGO_ENABLED=0 GOOS=linux
 
 # Copy go mod files and download dependencies
 COPY go.mod go.sum ./

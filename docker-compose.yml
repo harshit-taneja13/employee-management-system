@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image : harshittaneja/ems-crud-image:v1
+    image : harshittaneja/ems-crud-image:latest
     container_name: crud-api-1
     ports:
       - "${PORT:-8080}:8080"
@@ -15,3 +15,4 @@ services:
     volumes:
       - ${PWD}/.env:/app/.env:ro
     
+
